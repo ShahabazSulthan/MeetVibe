@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MeetVibe Video Chat App</title>
+    <style>
+        :root {
+            --primary-color: #00c6ff;
+            --secondary-color: #0072ff;
+            --background-color: #0f172a;
+            --text-color: #e2e8f0;
+            --button-color: #1e40af;
+            --button-hover: #2563eb;
+            --button-shadow: rgba(37, 99, 235, 0.5);
+        }
+
+        body {
+            font-family: "Arial", sans-serif;
+            margin: 0;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        button {
+            background-color: var(--button-color);
+            color: var(--text-color);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px var(--button-shadow);
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the MeetVibe</h1>
+        <button onclick="createRoom()">Create a New Room</button>
+    </div>
+
+    <script>
+        async function createRoom() {
+            const response = await fetch("/create", { method: "POST" });
+            const data = await response.json();
+            window.location.href = `/room/${data.room_id}`;
+        }
+    </script>
+</body>
+</html>
